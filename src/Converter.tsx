@@ -28,6 +28,7 @@ function Converter() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    document.title = 'Crypto-Converter'; 
     fetchCryptoList();
     fetchAllCurrencies()
   }, []);
@@ -61,10 +62,8 @@ function Converter() {
       const response = await axios.post<ConversionResult>(
         `${Currency_API}/currency/convert`, payload
       );
-      const responseData = response.data;
-      setResult(
-        `Converted Amount: ${responseData.convertedAmount}`
-      );
+      const responseData :any= response.data;
+      setResult(responseData.convertedAmount);
       setIsLoading(false);
     } catch (error) {
       setErrorMsg('Error occurred during conversion. Please try again.');
@@ -138,7 +137,12 @@ function Converter() {
           </button>
         </form>
 
-        {result && <div className="mt-4 text-green-700">{result}</div>}
+        {result && 
+        <div className="mt-4">
+        <span className="text-gray-500 ">Converted Amount: </span>
+       <span className="text-green-700 font-extrabold">{result}</span>
+        </div>
+        }
         {error && <div className="mt-4 text-red-700">{error}</div>}
       </div>
     </div>
