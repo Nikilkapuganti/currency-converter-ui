@@ -1,5 +1,5 @@
 import React from 'react';
-import Converter from './Converter';
+import Converter from './components/Converter';
 
 
 function App() {
